@@ -1,0 +1,594 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="display-4">Categorical Analysis</h1>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Average Installs Category Wise.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            <canvas id="category_avg_installs" style="margin-left: 10%"></canvas>
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header font-weight-light">Average Ratings Category Wise.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            <canvas id="category_avg_rating" style="margin-left: 10%"></canvas>
+        </div>
+        <h5 class="card-header font-weight-light">Average Reviews Category Wise.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            <canvas id="category_avg_review" style="margin-left: 10%"></canvas>
+        </div>
+        <h5 class="card-header font-weight-light">Average Price Category Wise.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            <canvas id="grp_price" style="margin-left: 10%"></canvas>
+        </div>
+        <h5 class="card-header font-weight-light">Average Price Category Wise.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            {% autoescape off %}
+                {{ rel_date_count }}
+            {% endautoescape %}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script>
+        var ctx = document.getElementById('category_avg_installs').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ categories|safe }},
+                datasets: [{
+                    label: 'Average Installs',
+                    data: {{ avg_installs|safe }},
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend:{
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number of Installs',
+                            fontSize: 15
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                title:{
+                    display: true,
+                    text: 'Average installs by Category',
+                    position: 'bottom',
+                    fontSize: 20,
+                }
+            }
+        });
+
+
+        var ctx = document.getElementById('category_avg_rating').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ categories|safe }},
+                datasets: [{
+                    label: 'Average Rating',
+                    data: {{ avg_rating|safe }},
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title:{
+                    display: true,
+                    text: 'Average ratings by Category',
+                    position: 'bottom',
+                    fontSize: 20,
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Average Installs',
+                            fontSize: 15
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx = document.getElementById('category_avg_review').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ categories|safe }},
+                datasets: [{
+                    label: 'Average Reviews',
+                    data: {{ avg_review|safe }},
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title:{
+                    display: true,
+                    text: 'Average reviews by Category',
+                    position: 'bottom',
+                    fontSize: 20,
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Average Reviews',
+                            fontSize: 15
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        var ctx = document.getElementById('grp_price').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ categories|safe }},
+                datasets: [{
+                    label: 'Average Price in USD',
+                    data: {{ grp_price|safe }},
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title:{
+                    display: true,
+                    text: 'Average Price by Category',
+                    position: 'bottom',
+                    fontSize: 20,
+                },
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Average Price (USD)',
+                            fontSize: 15
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+{% endblock %}

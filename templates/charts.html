@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="display-4">Exploratory analysis of dataset.</h1>
+    <div class="card">
+        <h5 class="card-header">Installs vs. Reviews</h5>
+        <div class="card-body" style="width: 80%; height: 70%;">
+            {% autoescape off %}
+                {{ installs_counts }}
+            {% endautoescape %}
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Rating as Percentage of Installs.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            {% autoescape off %}
+                {{ rating_as_install_per }}
+            {% endautoescape %}
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Price Distribution.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            {% autoescape off %}
+                {{ price_dist }}
+            {% endautoescape %}
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Price vs Installs.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            {% autoescape off %}
+                {{ price_installs }}
+            {% endautoescape %}
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Average Size by Category.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            {% autoescape off %}
+                {{ average_size }}
+            {% endautoescape %}
+        </div>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Ratings vs Price.</h5>
+        <div class="card-body" style="width: 80%; height: 70%">
+            {% autoescape off %}
+                {{ rating_price }}
+            {% endautoescape %}
+        </div>
+    </div>
+{% endblock %}

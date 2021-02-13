@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body_style %}
+    style="background-color: #111111"
+{% endblock %}
+{% block content %}
+    <h1 class="display-4" style="background-color: transparent; color: white; font-weight: bolder">Cluster Analysis</h1>
+    <div class="card" style="background-color: transparent">
+        <h5 class="card-header" style="background-color: transparent; color: white; font-weight: bolder">Installs vs. Reviews</h5>
+        <div class="card-body" style="width: 80%; height: 90%; background-color: transparent">
+            {% autoescape off %}
+                {{review_installs}}
+            {% endautoescape %}
+        </div>
+
+
+        <div class="card" style="background-color: transparent">
+            <h5 class="card-header" style="background-color: transparent; color: white; font-weight: bolder">Installs vs. Rating</h5>
+            <div class="card-body" style="width: 80%; height: 90%; background-color: transparent">
+                {% autoescape off %}
+                    {{rating_installs}}
+                {% endautoescape %}
+            </div>
+        </div>
+
+
+        <div class="card" style="background-color: transparent; margin-bottom: 3rem">
+            <h5 class="card-header" style="background-color: transparent; color: white; font-weight: bolder">Installs vs. Price and Rating</h5>
+            <div class="card-body" style="width: 80%; height: 90%; background-color: transparent">
+                {% autoescape off %}
+                    {{plot_3d}}
+                {% endautoescape %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

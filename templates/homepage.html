@@ -1,0 +1,344 @@
+{% extends 'base.html' %}
+{% block title %}Analysis Overview{% endblock %}
+{% block content %}
+    <h1 class="display-4">Overview</h1>
+    <div class="card" style="text-align: center; padding-bottom: 2%">
+        <h5 class="card-header" style="text-align: left;">Percentage of Apps by Category.</h5>
+        <div class="card-body" style="width: 80%; height: 70%;">
+            <canvas id="category_download" style="margin-left: 10%"></canvas>
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">Number of Apps by Category.</h5>
+        <div class="card-body" style="width: 80%; height: 70%; margin-top: 6%; text-align: center">
+            <canvas id="category_download_bar" style="margin-left: 10%"></canvas>
+        </div>
+    </div>
+    <div class="card" style="text-align: center; padding-bottom: 2%">
+        <h5 class="card-header" style="text-align: left">Free vs. Paid Percentage</h5>
+        <div class="card-body" style="width: 70%; height: 70%;">
+            <canvas id="free_paid_per" style="margin-left: 20%"></canvas>
+        </div>
+    </div>
+    <div class="card" style="text-align: center; padding-bottom: 2%">
+        <h5 class="card-header" style="text-align: left">Percentage of free apps containing in-app purchases</h5>
+        <div class="card-body" style="width: 70%; height: 70%;">
+            <canvas id="in_app" style="margin-left: 20%"></canvas>
+        </div>
+    </div>
+    <div class="card" style="text-align: center; padding-bottom: 2%">
+        <h5 class="card-header" style="text-align: left">Number of free apps supporting Ads</h5>
+        <div class="card-body" style="width: 70%; height: 60%;">
+            <canvas id="ad_support" style="margin-left: 15%"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script>
+        var ctx = document.getElementById("category_download").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: {{ categories|safe }},
+                datasets: [{
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    data: {{ category_downloads|safe }}
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Pie : Number of apps by category",
+                    position: 'bottom',
+                    fontSize: 20
+                }
+            }
+        });
+
+
+        var ctx = document.getElementById('category_download_bar').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ categories|safe }},
+                datasets: [{
+                    label: 'Number of Apps.',
+                    data: {{ category_downloads_bar|safe }},
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderColor: [
+                        "#2ecc71",
+                        "#3498db",
+                        "#95a5a6",
+                        "#9b59b6",
+                        "#f1c40f",
+                        "#34495e",
+                        "#e74c3c",
+                        "#39FF14",
+                        "#8DB600",
+                        "#008000",
+                        "#FBCEB1",
+                        "#FAF0BE",
+                        "#C4C3D0",
+                        "#76D7EA",
+                        "#FFD300",
+                        "#F88379",
+                        "#FADA5E",
+                        "#1560BD",
+                        "#BCD4E6",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                        "#A2ADD0",
+                        "#A6A6A6",
+                        "#ED2939",
+                        "#E0F9CB",
+                        "#A8F47F",
+                        "#76CFE3",
+                        "#E33414",
+                        "#96D751",
+                        "#E7A708",
+                        "#EC6B97",
+                        "#6E6BCD",
+                        "#CFD28C",
+                        "#A99A86",
+                        "#BC8F8F",
+                        "#54A3C5",
+                        "#C5CBE1",
+                        "#FB9902",
+                        "#A1CAF1",
+                        "#727472",
+                        "#A0D6B4",
+                        "#FF9F00",
+                        "#A9A9A9",
+                        "#CD5700",
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number of Apps',
+                            fontSize: 15
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: "Bar : Number of apps by Category",
+                    position: 'bottom',
+                    fontSize: 20
+                }
+            }
+        });
+
+
+        var ctx = document.getElementById("free_paid_per").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Free%", "Paid%"],
+                datasets: [{
+                    backgroundColor: [
+                        "#2ecc71",
+                        "#3498db",
+                    ],
+                    data: {{ percentage|safe }}
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Free vs. Paid Percentage",
+                    fontSize: 20,
+                    position: 'bottom'
+                }
+            }
+        });
+
+
+        var ctx = document.getElementById("in_app").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Free apps with In App Purchases", "Free Apps without In App Purchases"],
+                datasets: [{
+                    backgroundColor: [
+                        "#e74c3c",
+                        "#34495e"
+                    ],
+                    data: {{ in_app_per|safe }}
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Pie : Free apps with In App Purchases',
+                    fontSize: 20,
+                    position: 'bottom'
+                }
+            }
+        });
+
+        var ctx = document.getElementById('ad_support').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: ['Contains Ads', 'Does not contain Ads'],
+                datasets: [{
+                    label: 'Percentage of Apps',
+                    data: {{ add_support|safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132)',
+                        'rgba(54, 162, 235)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Percentage of apps",
+                    fontSize: 20,
+                    position: 'bottom'
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Percentage of apps',
+                            fontSize: 15
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
+    </script>
+{% endblock %}
