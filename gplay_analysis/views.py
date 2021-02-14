@@ -6,48 +6,179 @@ import plotly.express as px
 from sklearn import preprocessing
 from sklearn.cluster import KMeans
 import os
-from datetime import datetime
+
+# Exploratory Analysis and Data Cleaning.
+"""
+df = pd.read_csv(os.path.join(BASE, 'data\Google-Playstore.csv'))
+
+data cleaning steps -
+df.loc[737542:737543, 'App Name'] = 'NA'
+df['Category'].fillna(value=df['Category'].mode()[0], inplace=True)
+df['Rating'].fillna(value=round(df['Rating'].mean(), 1), inplace=True)
+df['Rating Count'].fillna(value=df['Rating Count'].median(), inplace=True)
+df['Minimum Installs'].fillna(value=df['Minimum Installs'].median(), inplace=True)
+df['Installs'].fillna(value='1000+', inplace=True)   #mode of Installs
+df['Currency'].fillna(value=df['Currency'].mode()[0], inplace=True)
+df['Minimum Android'].fillna(value=df['Minimum Android'].mode()[0], inplace=True)
+
+def size(x):
+if x=='Varies with device':
+    return 0
+elif x[-1]=='M':
+    return float(x[:-1])
+else:
+    return float(x[:-1].replace(',','')) / 1024
+
+df['Modified Size'] = df['Size'].apply(size)
+
+def date_change(x):
+return datetime.strptime(x, '%b %d, %Y')
+
+df['Last Updated'] = df['Last Updated'].apply(lambda x: datetime.strptime(x, '%b %d, %Y'))
+
+def date_formatting(x):
+try:
+    return datetime.strptime(x, '%b %d, %Y')
+except:
+    return x
+
+    df['Released'] = df['Released'].apply(date_formatting)
+
+    df.drop('App Id', axis=1, inplace=True)
+    df.drop('Minimum Installs', axis=1, inplace=True)
+    df.drop(['Developer Website', 'Developer Email', 'Privacy Policy'], axis=1, inplace=True)
+    df.drop('Developer Id', axis=1, inplace=True)
+
+    df.drop('Minimum Android', axis=1, inplace=True)
+
+    df.drop('Content Rating', axis=1, inplace=True)
+
+
+    def currency_convert(row):
+if row['Currency'] == cur_arr[0]:
+    return row['Price'] * 72.67
+if row['Currency'] == cur_arr[1]:
+    return row['Price']
+if row['Currency'] == cur_arr[2]:
+    return row['Price'] * 87.97
+if row['Currency'] == cur_arr[3]:
+    return row['Price'] * 0.98
+if row['Currency'] == cur_arr[4]:
+    return row['Price'] * 22.34
+if row['Currency'] == cur_arr[5]:
+    return row['Price'] * 0.0032
+if row['Currency'] == cur_arr[6]:
+    return row['Price'] * 0.69
+if row['Currency'] == cur_arr[7]:
+    return row['Price'] * 4.96
+if row['Currency'] == cur_arr[8]:
+    return row['Price'] * 0.048
+if row['Currency'] == cur_arr[9]:
+    return row['Price'] * 56.12
+if row['Currency'] == cur_arr[10]:
+    return row['Price'] * 2.59
+if row['Currency'] == cur_arr[11]:
+    return row['Price'] * 9.37
+if row['Currency'] == cur_arr[12]:
+    return row['Price'] * 2.61
+if row['Currency'] == cur_arr[13]:
+    return row['Price'] * 8.73
+if row['Currency'] == cur_arr[14]:
+    return row['Price'] * 0.066
+if row['Currency'] == cur_arr[15]:
+    return row['Price'] * 0.46
+if row['Currency'] == cur_arr[16]:
+    return row['Price']
+if row['Currency'] == cur_arr[17]:
+    return row['Price'] * 3.42
+if row['Currency'] == cur_arr[18]:
+    return row['Price'] * 57.03
+if row['Currency'] == cur_arr[19]:
+    return row['Price'] * 3.62
+if row['Currency'] == cur_arr[20]:
+    return row['Price'] * 10.34
+if row['Currency'] == cur_arr[21]:
+    return row['Price'] * 0.17
+if row['Currency'] == cur_arr[22]:
+    return row['Price'] * 100.25
+if row['Currency'] == cur_arr[23]:
+    return row['Price'] * 54.74
+if row['Currency'] == cur_arr[24]:
+    return row['Price'] * 0.0052
+if row['Currency'] == cur_arr[25]:
+    return row['Price'] * 0.55
+if row['Currency'] == cur_arr[26]:
+    return row['Price'] * 19.77
+if row['Currency'] == cur_arr[27]:
+    return row['Price'] * 19.54
+if row['Currency'] == cur_arr[28]:
+    return row['Price'] * 81.36
+if row['Currency'] == cur_arr[29]:
+    return row['Price'] * 2.43
+if row['Currency'] == cur_arr[30]:
+    return row['Price'] * 44.99
+if row['Currency'] == cur_arr[31]:
+    return row['Price'] * 19.35
+if row['Currency'] == cur_arr[32]:
+    return row['Price'] * 11.82
+if row['Currency'] == cur_arr[33]:
+    return row['Price'] * 0.18
+if row['Currency'] == cur_arr[34]:
+    return row['Price'] * 0.86
+if row['Currency'] == cur_arr[35]:
+    return row['Price'] * 8.55
+if row['Currency'] == cur_arr[36]:
+    return row['Price'] * 0.25
+if row['Currency'] == cur_arr[37]:
+    return row['Price'] * 0.66
+if row['Currency'] == cur_arr[38]:
+    return row['Price'] * 0.37
+if row['Currency'] == cur_arr[39]:
+    return row['Price'] * 52.22
+if row['Currency'] == cur_arr[40]:
+    return row['Price'] * 0.75
+if row['Currency'] == cur_arr[41]:
+    return row['Price'] * 17.96
+if row['Currency'] == cur_arr[42]:
+    return row['Price'] * 13.47
+if row['Currency'] == cur_arr[43]:
+    return row['Price'] * 0.021
+if row['Currency'] == cur_arr[44]:
+    return row['Price'] * 19.94
+if row['Currency'] == cur_arr[45]:
+    return row['Price'] * 11.61
+if row['Currency'] == cur_arr[46]:
+    return row['Price'] * 10.51
+if row['Currency'] == cur_arr[47]:
+    return row['Price'] * 0.12
+if row['Currency'] == cur_arr[48]:
+    return row['Price'] * 1.51
+if row['Currency'] == cur_arr[49]:
+    return row['Price'] * 4.64
+if row['Currency'] == cur_arr[50]:
+    return row['Price'] * 12.50
+if row['Currency'] == cur_arr[51]:
+    return row['Price'] * 0.10
+if row['Currency'] == cur_arr[52]:
+    return row['Price'] * 0.031
+if row['Currency'] == cur_arr[53]:
+    return row['Price'] * 18.03
+
+
+df['Modified Currency'] = df.apply(currency_convert, axis=1)
+df.drop(['Price', 'Currency'], axis=1, inplace=True)
+df['Price'] = df['Modified Currency']
+df.drop('Modified Currency', axis=1, inplace=True)
+df.to_csv('cleaned.csv', index=False)
+"""
 
 # Create your views here.
 BASE = os.path.dirname(os.path.abspath(__file__))
 
 
 def home_page(request):
-    # Exploratory Analysis and Data Cleaning.
-    """
-    df = pd.read_csv(os.path.join(BASE, 'data\Google-Playstore.csv'))
-    df.loc[737542:737543, 'App Name'] = 'NA'
-    df['Category'].fillna(value=df['Category'].mode()[0], inplace=True)
-    df['Rating'].fillna(value=round(df['Rating'].mean(), 1), inplace=True)
-    df['Rating Count'].fillna(value=df['Rating Count'].median(), inplace=True)
-    df['Minimum Installs'].fillna(value=df['Minimum Installs'].median(), inplace=True)
-    df['Installs'].fillna(value='1000+', inplace=True)
-    df['Currency'].fillna(value=df['Currency'].mode()[0], inplace=True)
-    df['Minimum Android'].fillna(value=df['Minimum Android'].mode()[0], inplace=True)
-    df.to_csv(os.path.join(BASE, 'data\cleaned.csv'))
-    df.drop('App Id', axis=1, inplace=True)
-    df.drop('Minimum Installs', axis=1, inplace=True)
 
 
-    def size(x):
-    if x=='Varies with device':
-        return 0
-    elif x[-1]=='M':
-        return float(x[:-1])
-    else:
-        return float(x[:-1].replace(',','')) / 1024
-    df['Modified Size'] = df['Size'].apply(size)
-
-    def date_change(x):
-        return datetime.strptime(x, '%b %d, %Y')
-    df['Last Updated'] = df['Last Updated'].apply(lambda x: datetime.strptime(x, '%b %d, %Y'))
-
-    df.drop('Last Updated', axis=1, inplace=True)
-
-    from datetime import datetime
-    def date_change(x):
-        return datetime.strptime(x, '%b %d, %Y')
-    """
     df = pd.read_csv(os.path.join(BASE, 'data\cleaned.csv'))
 
     total_app_count = df['App Name'].count()
