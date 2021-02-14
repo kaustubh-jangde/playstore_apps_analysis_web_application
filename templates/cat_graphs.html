@@ -1,26 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1 class="display-4">Categorical Analysis</h1>
+    <h1 class="display-4" style="font-family: 'Dancing Script', cursive;">Categorical Analysis</h1>
     <div class="card">
-        <h5 class="card-header font-weight-light">Average Installs Category Wise.</h5>
+        <h5 class="card-header">Average Installs Category Wise.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             <canvas id="category_avg_installs" style="margin-left: 10%"></canvas>
         </div>
     </div>
     <div class="card">
-        <h5 class="card-header font-weight-light">Average Ratings Category Wise.</h5>
+        <h5 class="card-header">Average Ratings Category Wise.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             <canvas id="category_avg_rating" style="margin-left: 10%"></canvas>
         </div>
-        <h5 class="card-header font-weight-light">Average Reviews Category Wise.</h5>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Average Reviews Category Wise.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             <canvas id="category_avg_review" style="margin-left: 10%"></canvas>
         </div>
-        <h5 class="card-header font-weight-light">Average Price Category Wise.</h5>
+    </div>
+    <div class="card">
+        <h5 class="card-header">Average Price Category Wise.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             <canvas id="grp_price" style="margin-left: 10%"></canvas>
         </div>
-        <h5 class="card-header font-weight-light">Average Price Category Wise.</h5>
+    </div>
+    <div class="card">
+        <h5 class="card-header">App release date time-series.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             {% autoescape off %}
                 {{ rel_date_count }}
@@ -300,7 +306,7 @@
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Average Installs',
+                            labelString: 'Average Ratings',
                             fontSize: 15
                         },
                         ticks: {
@@ -457,7 +463,7 @@
             data: {
                 labels: {{ categories|safe }},
                 datasets: [{
-                    label: 'Average Price in USD',
+                    label: 'Average Price (INR)',
                     data: {{ grp_price|safe }},
                     backgroundColor: [
                         "#2ecc71",
@@ -580,7 +586,7 @@
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Average Price (USD)',
+                            labelString: 'Average Price (INR)',
                             fontSize: 15
                         },
                         ticks: {

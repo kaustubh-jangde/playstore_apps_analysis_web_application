@@ -1,52 +1,107 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1 class="display-4">Exploratory analysis of dataset.</h1>
-    <div class="card">
+    <h1 class="display-4" style="font-family: 'Dancing Script', cursive;">Exploratory analysis of dataset.</h1>
+    <div class="card" style="position: relative; padding-bottom: 15rem;">
         <h5 class="card-header">Installs vs. Reviews</h5>
         <div class="card-body" style="width: 80%; height: 70%;">
             {% autoescape off %}
                 {{ installs_counts }}
             {% endautoescape %}
         </div>
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: salmon">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Highest number of installs of any paid apps is 32.6M with rating count of 3.7M.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Paid apps are more likely to get more rating count at same install counts.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="card">
+    <div class="card" style="position: relative; padding-bottom: 15rem;">
         <h5 class="card-header">Rating as Percentage of Installs.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             {% autoescape off %}
                 {{ rating_as_install_per }}
             {% endautoescape %}
         </div>
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: #1F77B4">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Strategy apps have highest rating count as percent of installs with 3.25%.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Productivity apps have lowest rating count as percent of installs with 0.35%.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="card">
+    <div class="card" style="position: relative; padding-bottom: 15rem;">
         <h5 class="card-header">Price Distribution.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             {% autoescape off %}
                 {{ price_dist }}
             {% endautoescape %}
         </div>
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: #E58606">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">50% of the apps have price less than ₹144.6.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">75% of the apps have price less than ₹289.9.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Highest price of any app is ₹29,068.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="card">
+    <div class="card" style="position: relative; padding-bottom: 15rem;">
         <h5 class="card-header">Price vs Installs.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             {% autoescape off %}
                 {{ price_installs }}
             {% endautoescape %}
         </div>
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: #7F3C8D">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Paid apps having price in range of ₹25-₹75 have highest combined downloads than any other price range.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">People don't like spending more money on apps, which is again confirmed by right skewness of the graph.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="card">
+    <div class="card" style="position: relative; padding-bottom: 15rem;">
         <h5 class="card-header">Average Size by Category.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             {% autoescape off %}
                 {{ average_size }}
             {% endautoescape %}
         </div>
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: #41AEA9">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Role playing apps have highest average size of 51.09 MB.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Apps belonging to tools category has lowest average size of 9.59 MB.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="card">
+    <div class="card" style="position: relative; padding-bottom: 15rem;">
         <h5 class="card-header">Ratings vs Price.</h5>
         <div class="card-body" style="width: 80%; height: 70%">
             {% autoescape off %}
                 {{ rating_price }}
             {% endautoescape %}
+        </div>
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: mediumslateblue">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Highly priced apps have ratings above 2.5</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Apps towards lower side of price scale have mixed ratings.</li>
+                </ul>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -3,17 +3,36 @@
     style="background-color: #111111"
 {% endblock %}
 {% block content %}
-    <h1 class="display-4" style="background-color: transparent; color: white; font-weight: bolder">Cluster Analysis</h1>
-    <div class="card" style="background-color: transparent">
-        <h5 class="card-header" style="background-color: transparent; color: white; font-weight: bolder">Installs vs. Reviews</h5>
+    <h1 class="display-4" style="background-color: transparent; color: white; font-weight: bolder; font-family: 'Dancing Script', cursive;">Cluster Analysis</h1>
+    <div class="card" style="background-color: transparent; position: relative; padding-bottom: 20rem;">
+        <h5 class="card-header" style="background-color: transparent; color: white; font-weight: bolder">Installs vs. Rating Count</h5>
         <div class="card-body" style="width: 80%; height: 90%; background-color: transparent">
             {% autoescape off %}
                 {{review_installs}}
             {% endautoescape %}
         </div>
 
-
-        <div class="card" style="background-color: transparent">
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: transparent; border: 1px solid white">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">
+                        <ol>
+                            There are four clusters:
+                            <li>Apps with high rating count.</li>
+                            <li>Apps with high number of installs.</li>
+                            <li>Apps with average installs and average rating count.</li>
+                            <li>Apps with low installs and low rating count.</li>
+                        </ol>
+                    </li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Apps with higher rating shall focus on increasing their installs.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Apps with higher installs shall appeal their users to rate their apps.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="background-color: transparent; position: relative; padding-bottom: 20rem;">
+        <div class="card" style="background-color: transparent; position: relative">
             <h5 class="card-header" style="background-color: transparent; color: white; font-weight: bolder">Installs vs. Rating</h5>
             <div class="card-body" style="width: 80%; height: 90%; background-color: transparent">
                 {% autoescape off %}
@@ -21,14 +40,51 @@
                 {% endautoescape %}
             </div>
         </div>
-
-
-        <div class="card" style="background-color: transparent; margin-bottom: 3rem">
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: transparent; border: 1px solid white">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">
+                        <ol>
+                            There are three clusters:
+                            <li>Apps with low rating low installs.</li>
+                            <li>Apps with high rating low installs.</li>
+                            <li>Apps with high rating high installs.</li>
+                        </ol>
+                    </li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Apps with high rating low installs shall focus on promoting their app and increase their user base.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Apps with low rating shall focus on increasing their app's user experience.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card" style="background-color: transparent; position: relative; padding-bottom: 25rem;">
+        <div class="card" style="background-color: transparent;">
             <h5 class="card-header" style="background-color: transparent; color: white; font-weight: bolder">Installs vs. Price and Rating</h5>
             <div class="card-body" style="width: 80%; height: 90%; background-color: transparent">
                 {% autoescape off %}
                     {{plot_3d}}
                 {% endautoescape %}
+            </div>
+        </div>
+        <div class="card" style="width: 40rem; position: absolute; right: 3rem; bottom: 3rem; background-color: transparent; border: 1px solid white">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; text-decoration: underline; text-align: center; color: white;">Key Takeaways</h5>
+                <ul >
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">
+                        <ol>
+                            There are four clusters (Analysis only for paid apps):
+                            <li>Highly installed apps</li>
+                            <li>Highly priced apps</li>
+                            <li>Lowly priced apps with lower rating.</li>
+                            <li>Lowly priced apps with higher rating (which also happens to get more installs).</li>
+                        </ol>
+                    </li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Highly install apps could hike their prices to gain more profits.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Highly priced apps shall lower their prices to increase their user base.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Lowly priced apps with lower rating must either make their app free of focus on increasing the user experience and meet the expectations of the user.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; font-size: 0.9rem; color: white">Lowly priced apps with higher rating shall focus more on marketing and increasing their user base.</li>
+                </ul>
             </div>
         </div>
     </div>

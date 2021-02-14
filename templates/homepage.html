@@ -7,6 +7,15 @@
         <div class="card-body" style="width: 80%; height: 70%;">
             <canvas id="category_download" style="margin-left: 10%"></canvas>
         </div>
+        <div class="card" style="width: 40rem; margin: auto; background-color: salmon">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: white; text-decoration: underline;">Key Takeaways</h5>
+                <ul>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; color: white">Education apps comprises of almost 10% of total apps on playstore.</li>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; color: white">Education apps along with music and audio apps comprises almost 20% of total apps.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="card">
@@ -14,8 +23,16 @@
         <div class="card-body" style="width: 80%; height: 70%; margin-top: 6%; text-align: center">
             <canvas id="category_download_bar" style="margin-left: 10%"></canvas>
         </div>
+        <div class="card" style="width: 40rem; margin: auto; background-color: salmon">
+            <div class="card-body">
+                <h5 class="card-title" style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: white; text-decoration: underline; text-align: center">Key Takeaways</h5>
+                <ul>
+                    <li class="card-text" style="text-align: left; font-family: 'Reggae One', cursive; color: white">Parenting category has lowest (just 1784) number of apps.</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="card" style="text-align: center; padding-bottom: 2%">
+    <div class="card" style="text-align: center; padding-bottom: 2%; margin-top: 1rem;">
         <h5 class="card-header" style="text-align: left">Free vs. Paid Percentage</h5>
         <div class="card-body" style="width: 70%; height: 70%;">
             <canvas id="free_paid_per" style="margin-left: 20%"></canvas>
@@ -28,7 +45,7 @@
         </div>
     </div>
     <div class="card" style="text-align: center; padding-bottom: 2%">
-        <h5 class="card-header" style="text-align: left">Number of free apps supporting Ads</h5>
+        <h5 class="card-header" style="text-align: left">Number of free apps containing Ads</h5>
         <div class="card-body" style="width: 70%; height: 60%;">
             <canvas id="ad_support" style="margin-left: 15%"></canvas>
         </div>
@@ -254,7 +271,7 @@
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ["Free%", "Paid%"],
+                labels: ["Percentage of free apps", "Percentage of paid apps"],
                 datasets: [{
                     backgroundColor: [
                         "#2ecc71",
@@ -278,7 +295,7 @@
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ["Free apps with In App Purchases", "Free Apps without In App Purchases"],
+                labels: ["percentage of free apps with In App Purchases", "percentage of free Apps without In App Purchases"],
                 datasets: [{
                     backgroundColor: [
                         "#e74c3c",
@@ -317,12 +334,6 @@
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: "Percentage of apps",
-                    fontSize: 20,
-                    position: 'bottom'
-                },
                 scales: {
                     xAxes: [{
                         scaleLabel: {

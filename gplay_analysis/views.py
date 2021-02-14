@@ -127,7 +127,7 @@ def charts(request):
 
     installs_counts = plot(
         px.scatter(df, x='Maximum Installs', y='Rating Count', template='plotly_white', color=cost,
-                   color_discrete_sequence=["#61b15a", "#ec4646"], height=600, labels={'Maximum Installs': 'Number of Installs',
+                   color_discrete_sequence=["#ED7A50", "#218721"], height=600, labels={'Maximum Installs': 'Number of Installs',
                                                                                        'color': 'Pricing'}),
         output_type='div', include_plotlyjs=False)
 
@@ -139,7 +139,7 @@ def charts(request):
     percent_of_installs.reset_index(inplace=True)
     rating_as_install_per = plot(
         px.bar(percent_of_installs, x='Category', y='Rating as % of Installs', template='plotly_white',
-               color_discrete_sequence=px.colors.qualitative.D3, labels={'Rating as % of Installs': 'Rating as percentage of Installs'}, height=600),
+               color_discrete_sequence=px.colors.qualitative.D3, labels={'Rating as % of Installs': 'Rating count as percentage of Installs'}, height=600),
         output_type='div', include_plotlyjs=False)
 
     price_apps = df[df['Free'] == False]
@@ -168,7 +168,7 @@ def charts(request):
 
     rating_price = plot(
         px.scatter(price_apps, y='Rating', x='Price', template='plotly_white',
-                   color_discrete_sequence=["#00bcd4"], height=600),
+                   color_discrete_sequence=["#7B68EE"], height=600),
         output_type='div', include_plotlyjs=False)
 
     context = {'installs_counts': installs_counts,
@@ -189,7 +189,7 @@ def cluster(request):
     kmeans = KMeans(4)
     kmeans.fit(scaled_x)
     clusters = kmeans.fit_predict(scaled_x)
-    fig = px.scatter(x, x='Reviews', y='Installs', color=clusters, template='plotly_dark', labels={'Reviews': 'Number of Reviews',
+    fig = px.scatter(x, x='Reviews', y='Installs', color=clusters, template='plotly_dark', labels={'Reviews': 'Rating Counts',
                                                                                                    'Installs': 'Number of Installs'}, height=600)
     review_installs = plot(
         fig.update_traces(marker_coloraxis=None),
